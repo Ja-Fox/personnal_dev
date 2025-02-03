@@ -1,0 +1,59 @@
+        # if action == "north":
+        #     encounter = random.randint(1,15) 
+        #     if distance >= encounter:
+        #         distance = encounter
+        #         print(f"You only moved {distance} before encoutering a monster to fight!")
+        #         easy_combat(health,player_character)
+
+        #     else:
+
+
+        #         time.sleep(1)
+        #         print(f"You find a new weapon!")
+        #         new_weapon = Weapon_Classes.Adept_Staff('Adept Staff',6)
+        #         time.sleep(2)
+        #         answer = input("Do you want to equip it?").lower()
+        #         if answer == 'yes':
+        #             player_character.weapon = new_weapon
+        #         else:
+        #             continue
+        # elif action == 'move':
+            
+        #     cardinal_directions = ['north','south','east','west']
+        #     print("Your options are North, South, East, or West.")
+            
+        #     direction = input("What direction? ").lower()
+
+        #     if direction.isdigit():
+        #         print("Invalid direction.")
+        #         continue
+
+        #     elif direction not in cardinal_directions:
+        #         print("Invalid direction.")
+        #         continue
+            
+        #     else:
+        #         distance = int(input("How many steps?"))
+        #         time.sleep(1.5)
+        #         print(f"You moved {distance} steps {direction}")
+
+        #     if direction == 'north':
+        #         steps_n = steps_n + distance
+        #         encounter = random.randint(1,15)
+
+            # if steps_n >= encounter:
+            #     print("You discover a new weapon.")
+            #     item = Weapons_Class.Archmage_Staff('Archmage Staff',12)
+            #     print(f"Do you want to equip it?")
+
+            # while True:
+            #     ans = input().lower()
+            
+            #     if ans == 'no':
+            #         break
+
+            #     elif ans == 'yes':
+            #         player_character.weapon = ans
+            #         break
+            #     else:
+                  print("Invalid input.")

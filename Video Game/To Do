@@ -1,0 +1,28 @@
+Fix weapon class method names
+    - Hammer
+    - Sword
+    - Dagger
+    - Bow
+
+Move melee damage ranges from character classes to weapon instances
+    - Assassin
+    - Spellshot
+    - Lionheart
+    - Paladin
+    - Ritualist
+
+
+Write special ability descriptions
+    - Hammer
+    - Dagger
+    - Bow
+
+
+Write special ability damage conditionals
+    - Hammer
+    - Sword
+        -- Out For Blood needs a healing effect
+        -- Warlord's Fury needs a percentage healing effect
+        -- Legionnarie's stand needs to reduce incoming damage --> don't know how to do that
+    - Dagger
+    - Bow
