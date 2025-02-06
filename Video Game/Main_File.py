@@ -177,10 +177,10 @@ Congratulations, {player_name}. Your name will become a part of local history. P
                 if (random.randint(1,10) % 2 == 0):
                     weapon_text = "You found a weapon!"
                     for character in weapon_text:
-                    if character == ' ':
+                        if character == ' ':
+                            time.sleep(.05)
+                        print (character,end='',flush=True)
                         time.sleep(.05)
-                    print (character,end='',flush=True)
-                    time.sleep(.05)
                     print('\n')
                     found_weapon = Loot_Generator.dependent_weapon_gen(player_character)
                     pick_it_up_text = "Do you want to equip it?"
