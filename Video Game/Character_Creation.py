@@ -1,10 +1,12 @@
 import time
+import random
 import Paladin_Class
 import Lionheart_Class
 import Ritualist_Class
 import Archmage_Class
 import Assassin_Class
 import SpellShot_Class
+import Loot_Items
 
 
 def starting_character_class():
@@ -366,3 +368,24 @@ def game_setup_and_intro():
         player_character = SpellShot_Class.Spell_Shot(player_name,attributes) 
 
     return player_character
+
+def player_starting_location():
+    x_coordinate = random.randint(-5,5)
+    y_coordinate = random.randint(-6,1)
+    starting_coordinates = {'x':x_coordinate, 'y':y_coordinate}
+    return starting_coordinates
+
+def character_inventory(potion_inventory,item_inventory,item_to_add):
+    potion_inventory = potion_inventory
+    item_inventory = item_inventory
+    if item_to_add == Loot_Items.Potion:
+        potion_inventory.append(item_to_add)
+        potion_inventory.sort()
+    elif item_to_add == Loot_Items.Item:
+        item_inventory.append(item_to_add)
+        item_inventory.sort()
+    else:
+        pass
+    return potion_inventory , item_inventory
+
+

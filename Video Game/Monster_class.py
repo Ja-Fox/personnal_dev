@@ -37,3 +37,9 @@ class Boss_Monster:
     def get_boss_monster_health(self):
         self.monster_health = random.randint(30,45)
         return self.monster_health
+
+    def get_boss_monster_location(self):
+        x_coordinate = random.randint(-4,-2)
+        y_coordinate = random.randint(4,6)
+        boss_coordinates = {'x':x_coordinate, 'y':y_coordinate}
+        return boss_coordinates

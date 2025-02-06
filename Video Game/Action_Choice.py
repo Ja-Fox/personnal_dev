@@ -1,9 +1,3 @@
-import random
-import time
-# from Main_File import monster_location1,monster_location2,monster_location3,monster_location4,monster_location5,monster_location6
-# from Main_File import boss_location
-# from Main_File import player_location
-
 def movement_choice():
     cardinal_directions = ['north','south','east','west']
     print("Your options are North, South, East, or West.")

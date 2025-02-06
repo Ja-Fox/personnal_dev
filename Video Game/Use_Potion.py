@@ -1,19 +1,19 @@
 import Loot_Items
-import Main_File
 
 
-def use_minor_health_potion(potion,health):
-    health += potion.heal
-    return health
 
-def use_health_potion(potion,health):
-    health += potion.heal
-    return health
+def use_minor_health_potion(player_health):
+    player_health += Loot_Items.Minor_Health_Potion
+    return player_health
 
-def use_greater_health_potion(potion,health):
-    health += potion.heal 
-    return health
+def use_health_potion(player_health):
+    player_health += Loot_Items.Health_Potion
+    return player_health
 
-def use_life_potion(potion,health):
-    health += potion.heal
-    return health
+def use_greater_health_potion(player_health):
+    player_health += Loot_Items.Greater_Health_Potion 
+    return player_health
+
+def use_life_potion(player_health):
+    player_health += Loot_Items.Life_Potion
+    return player_health

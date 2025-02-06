@@ -9,7 +9,7 @@ import Loot_Items
 import Use_Potion
 
 
-def easy_combat(player_health, player_character, player_items):
+def easy_combat(player_health, player_character, potion_inventory, item_inventory):
     monster = Monster()
     encounter = monster.get_easy_monster_encounter()
     monster_health = monster.get_easy_monster_health()
@@ -24,7 +24,7 @@ def easy_combat(player_health, player_character, player_items):
         flee_role = player_character.flee_attempt()
         if flee_role >= 13:
             print("You escape!")
-            return player_health,player_items
+            return player_health,potion_inventory, item_inventory
 
         else:
             print("Flee failed! Ready yourself for combat!")
@@ -61,7 +61,7 @@ def easy_combat(player_health, player_character, player_items):
                             
                             time.sleep(3)
 
-                            player_health = defense_against_monster(player_character,player_health)
+                            player_health = defense_against_monster(player_character,potion_inventory, item_inventory)
                             print(f"""You have {player_health} HP left. """)
                             time.sleep(1)
 
@@ -182,32 +182,23 @@ def easy_combat(player_health, player_character, player_items):
                     #         break
 
                 if combat_choice == 'use potion':
-                    if len(player_items) > 0:
-                        print (player_items)
-                        potion_to_use = input("Which potion would you like to use? ").title()
+                    if len(potion_inventory) > 0:
+                        print (potion_inventory)
+                        potion_to_use = input("Which potion would you like to use? Only type the first word. ").title()
 
-                        if potion_to_use == 'Minor Health Potion':
-                            health = Use_Potion.use_minor_health_potion(Loot_Items.Minor_Health_Potion(),health)
-                            print (f"You healed to {health} HP.")
-                            player_items.remove(potion_to_use)
-
-                        if potion_to_use == 'Health Potion':
-                            health = Use_Potion.use_health_potion(Loot_Items.Health_Potion(),health)
-                            print (f"You healed to {health} HP.")
-                            player_items.remove(potion_to_use)
-
-                        if potion_to_use == 'Greater Health Potion':
-                            health = Use_Potion.use_greater_health_potion(Loot_Items.Greater_Health_Potion(),health)
-                            print (f"You healed to {health} HP.")
-                            player_items.remove(potion_to_use)
-
-                        if potion_to_use == 'Life Potion':
-                            health = Use_Potion.use_life_potion(Loot_Items.Life_Potion(),health)
-                            print (f"You healed to {health} HP.")
-                            player_items.remove(potion_to_use)
+                        if potion_to_use == 'Minor':
+                            player_health = Use_Potion.use_minor_health_potion(player_health)
+                        elif potion_to_use == 'Health':
+                            player_health = Use_Potion.use_health_potion(player_health)
+                        elif potion_to_use == 'Greater':
+                            player_health = Use_Potion.use_greater_health_potion(player_health)
+                        elif potion_to_use == 'Life':
+                            player_health = Use_Potion.use_life_potion(player_health)
                         else:
                             print("Invalid input!")
                             continue
+                        potion_inventory.remove(potion_to_use)
+                        print(f"You healed to {player_health} HP.")
                     else:
                         print ("you have no more potions.")
                         continue
@@ -373,47 +364,37 @@ def easy_combat(player_health, player_character, player_items):
                 #         break
 
             if combat_choice == 'use potion':
-                if len(player_items) > 0:
-                    print (player_items)
-                    potion_to_use = input("Which potion would you like to use? ").title()
-
-                    if potion_to_use == 'Minor Health Potion':
-                        health = Use_Potion.use_minor_health_potion(Loot_Items.Minor_Health_Potion(),health)
-                        print (f"You healed to {health} HP.")
-                        player_items.remove(potion_to_use)
-
-                    if potion_to_use == 'Health Potion':
-                        health = Use_Potion.use_health_potion(Loot_Items.Health_Potion(),health)
-                        print (f"You healed to {health} HP.")
-                        player_items.remove(potion_to_use)
-
-                    if potion_to_use == 'Greater Health Potion':
-                        health = Use_Potion.use_greater_health_potion(Loot_Items.Greater_Health_Potion(),health)
-                        print (f"You healed to {health} HP.")
-                        player_items.remove(potion_to_use)
-
-                    if potion_to_use == 'Life Potion':
-                        health = Use_Potion.use_life_potion(Loot_Items.Life_Potion(),health)
-                        print (f"You healed to {health} HP.")
-                        player_items.remove(potion_to_use)
+                if len(potion_inventory) > 0:
+                    print (potion_inventory)
+                    potion_to_use = input("Which potion would you like to use?Type only the first word. ").title()
+                    if potion_to_use == 'Minor':
+                        player_health = Use_Potion.use_minor_health_potion(player_health)
+                    elif potion_to_use == 'Health':
+                        player_health = Use_Potion.use_health_potion(player_health)
+                    elif potion_to_use == 'Greater':
+                        player_health = Use_Potion.use_greater_health_potion(player_health)
+                    elif potion_to_use == 'Life':
+                        player_health = Use_Potion.use_life_potion(player_health)
                     else:
                         print("Invalid input!")
                         continue
+                    potion_inventory.remove(potion_to_use)
+                    output = f"You healed to {player_health} HP."
                 else:
                     print ("you have no more potions.")
                     continue
 
     if player_health <= 0:
         print("You died.")
-        return player_health, player_items
+        return player_health, potion_inventory, item_inventory
     
     if monster_health <= 0:
         print("You survived this encounter and slayed the beast!")
         print(f"You are left with {player_health} hit points.")
-        return player_health, player_items
+        return player_health, potion_inventory, item_inventory
 
 
-def boss_combat(player_health, player_character, player_items, boss, boss_health):
+def boss_combat(player_health, player_character, potion_inventory, item_inventory, boss, boss_health):
     boss_entrance = f"You see the {boss} for the first time...."
     for character in boss_entrance:
         if character == ' ':
@@ -572,42 +553,32 @@ def boss_combat(player_health, player_character, player_items, boss, boss_health
                     time.sleep(1)
 
             if combat_choice == 'use potion':
-                if len(player_items) > 0:
-                    print (player_items)
-                    potion_to_use = input("Which potion would you like to use? ").title()
-
-                    if potion_to_use == 'Minor Health Potion':
-                        player_health = Use_Potion.use_minor_health_potion(Loot_Items.Minor_Health_Potion(),player_health)
-                        print (f"You healed to {player_health} HP.")
-                        player_items.remove(potion_to_use)
-
-                    if potion_to_use == 'Health Potion':
-                        player_health = Use_Potion.use_health_potion(Loot_Items.Health_Potion(),player_health)
-                        print (f"You healed to {player_health} HP.")
-                        player_items.remove(potion_to_use)
-
-                    if potion_to_use == 'Greater Health Potion':
-                        player_health = Use_Potion.use_greater_health_potion(Loot_Items.Greater_Health_Potion(),player_health)
-                        print (f"You healed to {player_health} HP.")
-                        player_items.remove(potion_to_use)
-
-                    if potion_to_use == 'Life Potion':
-                        player_health = Use_Potion.use_life_potion(Loot_Items.Life_Potion(),player_health)
-                        print (f"You healed to {player_health} HP.")
-                        player_items.remove(potion_to_use)
+                if len(potion_inventory) > 0:
+                    print (potion_inventory)
+                    potion_to_use = input("Which potion would you like to use? Type only the first word. ").title()
+                    if potion_to_use == 'Minor':
+                        player_health = Use_Potion.use_minor_health_potion(player_health)
+                    elif potion_to_use == 'Health':
+                        player_health = Use_Potion.use_health_potion(player_health)
+                    elif potion_to_use == 'Greater':
+                        player_health = Use_Potion.use_greater_health_potion(player_health)
+                    elif potion_to_use == 'Life':
+                        player_health = Use_Potion.use_life_potion(player_health)
                     else:
                         print("Invalid input!")
                         continue
+                    potion_inventory.remove(potion_to_use)
+                    print(f"You healed to {player_health} HP.")
                 else:
                     print ("You have no more potions.")
                     continue
 
     if player_health <= 0:
         print("You died.")
-        return player_health, player_items
+        return player_health, potion_inventory, item_inventory
     
     if boss_health <= 0:
-        # print("You survived this encounter and slayed the beast!")
-        # print(f"You are left with {player_health} hit points.")
-        return player_health, player_items
+        return player_health, potion_inventory, item_inventory
+
+
 
