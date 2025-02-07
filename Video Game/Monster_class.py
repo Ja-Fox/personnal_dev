@@ -6,7 +6,7 @@ class Monster:
         pass
 
     def get_easy_monster_encounter(self):
-        encounter_options= ['Troll','Dredge','Kobold','Goblin','Wendigo','Bugbear',"Wraith","Direwolf","Harpy","Corrupted Treant"]
+        encounter_options= ['Troll','Dredge','Kobold','Goblin','Bugbear',"Wraith","Direwolf","Harpy","Corrupted Treant"]
         self.monster = random.choice(encounter_options)
         return self.monster
 
@@ -14,12 +14,12 @@ class Monster:
         self.monster_health = random.randint(5,12)
         return self.monster_health
     
-    def medium_monster_encounter_options(self):
-        encounter_options= ['Wendigo','Bugbear',]
+    def get_medium_monster_encounter(self):
+        encounter_options= ['Wendigo','Bugbear','Wyeird']
         self.monster = random.choice(encounter_options)
         return self.monster
 
-    def medium_easy_monster_health(self):
+    def get_medium_monstart_health(self):
         self.monster_health = random.randint(10,25)
         return self.monster_health
     

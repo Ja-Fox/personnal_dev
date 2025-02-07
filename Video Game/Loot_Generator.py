@@ -227,23 +227,17 @@ def dependent_weapon_gen(player_character):
                         return weapon
 
 def potion_generator():
-    ## Create the potion in stances ##
-    minor_health_potion = Loot_Items.Minor_Health_Potion()
-    health_potion = Loot_Items.Health_Potion()
-    greater_health_potion = Loot_Items.Greater_Health_Potion()
-    life_potion = Loot_Items.Life_Potion()
-    
-    ## Randomly choose which drop swpans ##
+## Randomly choose which potion drops ##
     roll = random.randint(1,20)
     if roll >= 19:
-        dropped_potion = life_potion.name
+        dropped_potion = Loot_Items.Life_Potion()
         return dropped_potion
-    elif 14 <= roll < 19:
-        dropped_potion = greater_health_potion.name
+    elif 15 <= roll < 19:
+        dropped_potion = Loot_Items.Greater_Health_Potion()
         return dropped_potion
-    elif 8 <= roll < 14:
-        dropped_potion = health_potion.name
+    elif 7 <= roll < 14:
+        dropped_potion = Loot_Items.Health_Potion()
         return dropped_potion
     else:
-        dropped_potion = minor_health_potion.name
+        dropped_potion = Loot_Items.Minor_Health_Potion()
         return dropped_potion

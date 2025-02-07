@@ -9,6 +9,13 @@ import Loot_Items
 import Use_Potion
 
 
+def easy_flee_combat(player_character):
+    flee_role = player_character.flee_attempt()
+    if flee_role >= 13:
+        return True
+    else:
+        return False
+
 def easy_combat(player_health, player_character, potion_inventory, item_inventory):
     monster = Monster()
     encounter = monster.get_easy_monster_encounter()
@@ -21,189 +28,196 @@ def easy_combat(player_health, player_character, potion_inventory, item_inventor
     answer = input('Do you fight or flee? ').lower()
 
     if answer == 'flee':
-        flee_role = player_character.flee_attempt()
-        if flee_role >= 13:
-            print("You escape!")
-            return player_health,potion_inventory, item_inventory
-
+        success = easy_flee_combat(player_character)
+        if success is True:
+            print ('You escape!')
+            return player_health, potion_inventory, item_inventory
         else:
-            print("Flee failed! Ready yourself for combat!")
-            while (player_health > 0) and (monster_health > 0):
+            pass
+        answer = 'fight'
+        # if flee_role >= 13:
+        #     print("You escape!")
+        #     return player_health,potion_inventory, item_inventory
+
+        # else:
+        #     print("Flee failed! Ready yourself for combat!")
+        # answer == 'fight'
+    #         while (player_health > 0) and (monster_health > 0):
             
-                print("""Magic | Melee | Special | Use Potion""")
+    #             print("""Magic | Melee | Special | Use Potion""")
                 
-                combat_choice = input("You must make a decision: ").lower()
+    #             combat_choice = input("You must make a decision: ").lower()
 
-                if combat_choice == 'magic':
-                    print("Your spell options are:")
-                    options = ['A','B','C','D']
-                    for options,each_spell in zip(options,player_character.spells):
-                        print(f"""{options} - {each_spell}""")
-                    print ("\nMake your choice: ")
+    #             if combat_choice == 'magic':
+    #                 print("Your spell options are:")
+    #                 options = ['A','B','C','D']
+    #                 for options,each_spell in zip(options,player_character.spells):
+    #                     print(f"""{options} - {each_spell}""")
+    #                 print ("\nMake your choice: ")
                     
-                    spell_choice = input().lower()
+    #                 spell_choice = input().lower()
 
-                    spell_hit = player_character.combat_magic_hit_modifier()
-                    spell_dmg = player_character.combat_magic_dmg_modifier(spell_choice)
+    #                 spell_hit = player_character.combat_magic_hit_modifier()
+    #                 spell_dmg = player_character.combat_magic_dmg_modifier(spell_choice)
 
-                    if spell_hit > 11:
-                        print(f"You cast {spell_choice} and it connects! You deal {spell_dmg} damage!")
-                        if monster_health <= spell_dmg:
-                            monster_health = 0
+    #                 if spell_hit > 11:
+    #                     print(f"You cast {spell_choice} and it connects! You deal {spell_dmg} damage!")
+    #                     if monster_health <= spell_dmg:
+    #                         monster_health = 0
 
-                        elif monster_health > spell_dmg:
-                            print(f"Your spell hits, but does not kill the monster!")
-                            monster_health = monster_health - spell_dmg
+    #                     elif monster_health > spell_dmg:
+    #                         print(f"Your spell hits, but does not kill the monster!")
+    #                         monster_health = monster_health - spell_dmg
 
-                            time.sleep(1.5)
+    #                         time.sleep(1.5)
 
-                            print("You must now ready yourself for a counter attack.")
+    #                         print("You must now ready yourself for a counter attack.")
                             
-                            time.sleep(3)
+    #                         time.sleep(3)
 
-                            player_health = defense_against_monster(player_character,potion_inventory, item_inventory)
-                            print(f"""You have {player_health} HP left. """)
-                            time.sleep(1)
+    #                         player_health = defense_against_monster(player_character,potion_inventory, item_inventory)
+    #                         print(f"""You have {player_health} HP left. """)
+    #                         time.sleep(1)
 
-                    else:
-                        print(f"""You cast {spell_choice} but it misses!""")
-                        print("Prepare to defend yourself!")
+    #                 else:
+    #                     print(f"""You cast {spell_choice} but it misses!""")
+    #                     print("Prepare to defend yourself!")
                         
-                        time.sleep(2)
+    #                     time.sleep(2)
 
-                        player_health = defense_against_monster(player_character,player_health)
-                        print(f"You have {player_health} HP left.")
+    #                     player_health = defense_against_monster(player_character,player_health)
+    #                     print(f"You have {player_health} HP left.")
                     
-                if combat_choice == 'melee':
-                    print('Your options are:')
-                    for each_ability in player_character.weapon.abilities:
-                        print(each_ability, end ='  ')
-                    print("\nMake your choice. ")
+    #             if combat_choice == 'melee':
+    #                 print('Your options are:')
+    #                 for each_ability in player_character.weapon.abilities:
+    #                     print(each_ability, end ='  ')
+    #                 print("\nMake your choice. ")
 
-                    ability_choice = input().title()
+    #                 ability_choice = input().title()
 
-                    ability_hit = player_character.combat_melee_hit_modifier()
-                    ability_dmg = player_character.weapon.melee_dmg(ability_choice)
-                    modifier = player_character.combat_melee_dmg_modifier(ability_choice)
-                    ability_dmg += modifier
+    #                 ability_hit = player_character.combat_melee_hit_modifier()
+    #                 ability_dmg = player_character.weapon.melee_dmg(ability_choice)
+    #                 modifier = player_character.combat_melee_dmg_modifier(ability_choice)
+    #                 ability_dmg += modifier
 
-                    if ability_hit > 10:
-                        print(f"{ability_choice} connects! You deal {ability_dmg}.")
-                        if monster_health <= ability_dmg:
-                            monster_health = 0
+    #                 if ability_hit > 10:
+    #                     print(f"{ability_choice} connects! You deal {ability_dmg}.")
+    #                     if monster_health <= ability_dmg:
+    #                         monster_health = 0
                         
-                        elif monster_health > ability_dmg:
-                            print("Your attack hits, but does not kill the enemy.")
-                            monster_health = monster_health - ability_dmg
+    #                     elif monster_health > ability_dmg:
+    #                         print("Your attack hits, but does not kill the enemy.")
+    #                         monster_health = monster_health - ability_dmg
 
-                            time.sleep(1.5)
+    #                         time.sleep(1.5)
 
-                            print("Prepare for a counterattack!")
+    #                         print("Prepare for a counterattack!")
 
-                            time.sleep(1.5)
+    #                         time.sleep(1.5)
 
-                            player_health = defense_against_monster(player_character,player_health)
-                            print(f" You have {player_health} HP left.")
-                            time.sleep(1)
+    #                         player_health = defense_against_monster(player_character,player_health)
+    #                         print(f" You have {player_health} HP left.")
+    #                         time.sleep(1)
                         
-                    else:
-                        print(f"""{ability_choice} misses!""")
-                        time.sleep(1)
+    #                 else:
+    #                     print(f"""{ability_choice} misses!""")
+    #                     time.sleep(1)
 
-                    print("Defend yourself!")
+    #                 print("Defend yourself!")
                     
-                    time.sleep(2)
+    #                 time.sleep(2)
 
-                    player_health = defense_against_monster(player_character,player_health)
-                    print(f"You have {player_health} HP left.")
+    #                 player_health = defense_against_monster(player_character,player_health)
+    #                 print(f"You have {player_health} HP left.")
 
-                if combat_choice == 'special':
-                    try:
-                        special_ability, special_ability_description = player_character.weapon.get_special_ability()
-                        # special_ability_description = player_character.weapon.special_ability_description
-                        print(f"""Your weapon's special ability is:
-    {special_ability} - {special_ability_description}""")
-                        time.sleep(.5)
+    #             if combat_choice == 'special':
+    #                 try:
+    #                     special_ability, special_ability_description = player_character.weapon.get_special_ability()
+    #                     # special_ability_description = player_character.weapon.special_ability_description
+    #                     print(f"""Your weapon's special ability is:
+    # {special_ability} - {special_ability_description}""")
+    #                     time.sleep(.5)
 
-                        use_spec_answer = input("Do you want to use it? ").lower()
-                        if use_spec_answer == 'no':
-                            continue
-                        elif use_spec_answer == 'yes':
-                            print(f"You use {special_ability.split(' - ')[0]}.")
-                            # print(f"You use {special_ability}")
-                            player_health, dmg = player_character.weapon.special_ability_actions(player_character, player_health)
-                            if monster_health <= dmg:
-                                monster_health = 0
-                                break
+    #                     use_spec_answer = input("Do you want to use it? ").lower()
+    #                     if use_spec_answer == 'no':
+    #                         continue
+    #                     elif use_spec_answer == 'yes':
+    #                         print(f"You use {special_ability.split(' - ')[0]}.")
+    #                         # print(f"You use {special_ability}")
+    #                         player_health, dmg = player_character.weapon.special_ability_actions(player_character, player_health)
+    #                         if monster_health <= dmg:
+    #                             monster_health = 0
+    #                             break
                             
-                            else:
-                                monster_health -= dmg
+    #                         else:
+    #                             monster_health -= dmg
 
-                            time.sleep(1)
+    #                         time.sleep(1)
 
-                            print("Your enemy moves to attack!")
+    #                         print("Your enemy moves to attack!")
 
-                            time.sleep(1)
+    #                         time.sleep(1)
 
-                            player_health = defense_against_monster(player_character,player_health)
-                            print(f" You have {player_health} HP left.")
-                            time.sleep(1)
+    #                         player_health = defense_against_monster(player_character,player_health)
+    #                         print(f" You have {player_health} HP left.")
+    #                         time.sleep(1)
                         
-                    except NotImplementedError:
-                        print("Your weapon has no special ability!")
-                        time.sleep(1)
+    #                 except NotImplementedError:
+    #                     print("Your weapon has no special ability!")
+    #                     time.sleep(1)
                         
-                    # defense_chance = random.randint (1,20)
-                    # dmg_to_player = random.randint (1,10)
+    #                 # defense_chance = random.randint (1,20)
+    #                 # dmg_to_player = random.randint (1,10)
                     
-                    # if defense_chance == 20:
-                    #     dmg_to_player = 0
-                    #     print (f"""You take {dmg_to_player} damage!
-                    #         But don't rejoin too soon.
-                    #         Prepare your next move.""")
+    #                 # if defense_chance == 20:
+    #                 #     dmg_to_player = 0
+    #                 #     print (f"""You take {dmg_to_player} damage!
+    #                 #         But don't rejoin too soon.
+    #                 #         Prepare your next move.""")
 
-                    # elif 9 < defense_chance < 20:
-                    #     dmg_to_player = dmg_to_player // 2
-                    #     player_health = player_health - dmg_to_player
-                    #     print(f"""You ready yourself for impact.
-                    #         You suffer {dmg_to_player} damage.""")
+    #                 # elif 9 < defense_chance < 20:
+    #                 #     dmg_to_player = dmg_to_player // 2
+    #                 #     player_health = player_health - dmg_to_player
+    #                 #     print(f"""You ready yourself for impact.
+    #                 #         You suffer {dmg_to_player} damage.""")
                         
-                    #     if player_health <= 0:
-                    #         print("You died.")
-                    #         break
+    #                 #     if player_health <= 0:
+    #                 #         print("You died.")
+    #                 #         break
 
-                    # if 2 <= defense_chance <= 9:
-                    #     dmg_to_player = dmg_to_player - 2
-                    #     player_health = player_health - dmg_to_player
-                    #     print(f"""You take a brutal blow and suffer {dmg_to_player} damage.""")
+    #                 # if 2 <= defense_chance <= 9:
+    #                 #     dmg_to_player = dmg_to_player - 2
+    #                 #     player_health = player_health - dmg_to_player
+    #                 #     print(f"""You take a brutal blow and suffer {dmg_to_player} damage.""")
 
-                    #     if player_health <= 0:
-                    #         print("You died.")
-                    #         break
+    #                 #     if player_health <= 0:
+    #                 #         print("You died.")
+    #                 #         break
 
-                if combat_choice == 'use potion':
-                    if len(potion_inventory) > 0:
-                        print (potion_inventory)
-                        potion_to_use = input("Which potion would you like to use? Only type the first word. ").title()
+    #             if combat_choice == 'use potion':
+    #                 if len(potion_inventory) > 0:
+    #                     print (potion_inventory)
+    #                     potion_to_use = input("Which potion would you like to use? Only type the first word. ").title()
 
-                        if potion_to_use == 'Minor':
-                            player_health = Use_Potion.use_minor_health_potion(player_health)
-                        elif potion_to_use == 'Health':
-                            player_health = Use_Potion.use_health_potion(player_health)
-                        elif potion_to_use == 'Greater':
-                            player_health = Use_Potion.use_greater_health_potion(player_health)
-                        elif potion_to_use == 'Life':
-                            player_health = Use_Potion.use_life_potion(player_health)
-                        else:
-                            print("Invalid input!")
-                            continue
-                        potion_inventory.remove(potion_to_use)
-                        print(f"You healed to {player_health} HP.")
-                    else:
-                        print ("you have no more potions.")
-                        continue
+    #                     if potion_to_use == 'Minor':
+    #                         player_health = Use_Potion.use_minor_health_potion(player_health)
+    #                     elif potion_to_use == 'Health':
+    #                         player_health = Use_Potion.use_health_potion(player_health)
+    #                     elif potion_to_use == 'Greater':
+    #                         player_health = Use_Potion.use_greater_health_potion(player_health)
+    #                     elif potion_to_use == 'Life':
+    #                         player_health = Use_Potion.use_life_potion(player_health)
+    #                     else:
+    #                         print("Invalid input!")
+    #                         continue
+    #                     potion_inventory.remove(potion_to_use)
+    #                     print(f"You healed to {player_health} HP.")
+    #                 else:
+    #                     print ("you have no more potions.")
+    #                     continue
 
-    elif answer == 'fight':
+    if answer == 'fight':
            
         while (player_health > 0) and (monster_health > 0):
             
@@ -393,6 +407,12 @@ def easy_combat(player_health, player_character, potion_inventory, item_inventor
         print(f"You are left with {player_health} hit points.")
         return player_health, potion_inventory, item_inventory
 
+
+def medium_combat(player_health, player_character, potion_inventory, item_inventory):
+    pass
+
+def hard_combat(player_health, player_character, potion_inventory, item_inventory):
+    pass
 
 def boss_combat(player_health, player_character, potion_inventory, item_inventory, boss, boss_health):
     boss_entrance = f"You see the {boss} for the first time...."
