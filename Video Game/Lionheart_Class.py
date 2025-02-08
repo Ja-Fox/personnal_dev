@@ -96,7 +96,7 @@ Wild Blow - Swing at your target, pushing yourself to the limit with fury and ag
                 dmg = dmg + random.randint(2,5)
             else:
                 dmg = dmg + random.randint(1,4)
-
+            return dmg
 
         elif spell_choice == 'b':
             dmg = random.randint(1,10)
@@ -106,6 +106,7 @@ Wild Blow - Swing at your target, pushing yourself to the limit with fury and ag
                 dmg = dmg + random.randint(1,7)
             else:
                 dmg = dmg + random.randint(1,4)
+            return dmg
         
         elif spell_choice == 'c':
             dmg = random.randint(1,8)
@@ -116,8 +117,7 @@ Wild Blow - Swing at your target, pushing yourself to the limit with fury and ag
                 dmg = dmg + random.randint(2,7)
             else:
                 dmg = dmg + random.randint(2,4)
-
-        return dmg
+            return dmg
     
     def combat_magic_hit_modifier(self):
         spell_hit = random.randint(1,20)

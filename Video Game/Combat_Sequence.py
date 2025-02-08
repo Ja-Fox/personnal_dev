@@ -289,8 +289,10 @@ def boss_combat(player_health, player_character, potion_inventory, item_inventor
             
         if combat_choice == 'melee':
             print('Your options are:')
-            for each_ability in player_character.weapon.abilities:
-                print(each_ability, end ='  ')
+            options = ['A','B','C','D']
+            for options,each_ability in zip(options,player_character.weapon.abilities):
+                print(f"""{options} - {each_ability}""")
+                # print(each_ability, end ='  ')
             print("\nMake your choice. ")
 
             ability_choice = input().title()
