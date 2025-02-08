@@ -202,17 +202,20 @@ def easy_combat(player_health, player_character, potion_inventory, item_inventor
                     potion_to_use = input("Which potion would you like to use?Type only the first word. ").title()
                     if potion_to_use == 'Minor':
                         player_health = Use_Potion.use_minor_health_potion(player_health)
+                        potion_inventory.remove('Minor Health Potion')
                     elif potion_to_use == 'Health':
                         player_health = Use_Potion.use_health_potion(player_health)
+                        potion_inventory.remove('Health Potion')
                     elif potion_to_use == 'Greater':
                         player_health = Use_Potion.use_greater_health_potion(player_health)
+                        potion_inventory.remove('Greater Health Potion')
                     elif potion_to_use == 'Life':
                         player_health = Use_Potion.use_life_potion(player_health)
+                        potion_inventory.remove('Life Potion')
                     else:
                         print("Invalid input!")
                         continue
-                    potion_inventory.remove(potion_to_use)
-                    output = f"You healed to {player_health} HP."
+                    print(f"You healed to {player_health} HP.")
                 else:
                     print ("you have no more potions.")
                     continue
@@ -225,7 +228,6 @@ def easy_combat(player_health, player_character, potion_inventory, item_inventor
         print("You survived this encounter and slayed the beast!")
         print(f"You are left with {player_health} hit points.")
         return player_health, potion_inventory, item_inventory
-
 
 def medium_combat(player_health, player_character, potion_inventory, item_inventory):
     pass
@@ -254,7 +256,7 @@ def boss_combat(player_health, player_character, potion_inventory, item_inventor
                 print(f"""{options} - {each_spell}""")
             print ("\nMake your choice: ")
             
-            spell_choice = input().title()
+            spell_choice = input().lower()
 
             spell_hit = player_character.combat_magic_hit_modifier()
             spell_dmg = player_character.combat_magic_dmg_modifier(spell_choice)
@@ -292,10 +294,9 @@ def boss_combat(player_health, player_character, potion_inventory, item_inventor
             options = ['A','B','C','D']
             for options,each_ability in zip(options,player_character.weapon.abilities):
                 print(f"""{options} - {each_ability}""")
-                # print(each_ability, end ='  ')
             print("\nMake your choice. ")
 
-            ability_choice = input().title()
+            ability_choice = input().lower()
 
             ability_hit = player_character.combat_melee_hit_modifier()
             ability_dmg = player_character.weapon.melee_dmg(ability_choice)
@@ -372,16 +373,19 @@ def boss_combat(player_health, player_character, potion_inventory, item_inventor
                 potion_to_use = input("Which potion would you like to use? Type only the first word. ").title()
                 if potion_to_use == 'Minor':
                     player_health = Use_Potion.use_minor_health_potion(player_health)
+                    potion_inventory.remove('Minor Health Potion')
                 elif potion_to_use == 'Health':
                     player_health = Use_Potion.use_health_potion(player_health)
+                    potion_inventory.remove('Health Potion')
                 elif potion_to_use == 'Greater':
                     player_health = Use_Potion.use_greater_health_potion(player_health)
+                    potion_inventory.remove('Greater Health Potion')
                 elif potion_to_use == 'Life':
                     player_health = Use_Potion.use_life_potion(player_health)
+                    potion_inventory.remove('Life Potion')
                 else:
                     print("Invalid input!")
                     continue
-                potion_inventory.remove(potion_to_use)
                 print(f"You healed to {player_health} HP.")
             else:
                 print ("You have no more potions.")

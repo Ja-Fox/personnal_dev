@@ -152,7 +152,6 @@ Howling Gale - Batter your target with harsh winds
 
     def combat_melee_dmg_modifier(self,ability_choice):
         if (ability_choice  =='a'):
-        # or (ability_choice == 'b') or (ability_choice == 'c') or (ability_choice == 'd'):
             mod = random.randint(1,5)
             if self.attributes['Strength'] > 16:
                 mod += 3
@@ -283,13 +282,5 @@ Howling Gale - Batter your target with harsh winds
         time.sleep(3)
         print('\n')
         return self.starting_health
-
-
-
-
-
-
-
-
 
 

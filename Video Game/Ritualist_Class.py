@@ -87,9 +87,8 @@ Spirit Shackle - Conjure burning chains to strike at the target's soul
         pass
 
     def combat_magic_dmg_modifier(self,spell_choice):
-        if spell_choice =='a':
+        if spell_choice =='a': ## a = Aether Shock
             dmg = random.randint(1,5)
-
             if self.attributes['Intelligence'] > 16:
                 dmg = dmg + random.randint(2,8)
             elif 10 <= self.attributes['Intelligence'] <= 16:
@@ -98,7 +97,7 @@ Spirit Shackle - Conjure burning chains to strike at the target's soul
                 dmg = dmg + random.randint(1,4)
             return dmg
 
-        elif spell_choice == 'b':
+        elif spell_choice == 'b': ## b = Spirit of Agony
             dmg = random.randint(1,10)
             if self.attributes['Intelligence'] > 16:
                 dmg = dmg + random.randint(2,9)
@@ -108,7 +107,7 @@ Spirit Shackle - Conjure burning chains to strike at the target's soul
                 dmg = dmg + random.randint(1,4)
             return dmg
         
-        elif spell_choice == 'c':
+        elif spell_choice == 'c': ## c = Spirit Shakle
             dmg = random.randint(1,8)
 
             if self.attributes['Intelligence'] > 16:

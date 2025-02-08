@@ -86,15 +86,15 @@ class Novice_Staff(Staff):
 
     def melee_dmg(self,ability_choice):
 
-        if ability_choice  == 'Pummel':
+        if ability_choice  == 'a': ## A = Pummel
             dmg = random.randint(1,7)
             return dmg 
 
-        elif ability_choice == 'Twin strike':
+        elif ability_choice == 'b': ## B = Twin Strike
             dmg = random.randint(1,7)
             return dmg
 
-        elif ability_choice == 'Crushing blow':
+        elif ability_choice == 'b': ## C = Crushing Blow
             dmg = random.randint(1,7)
             return dmg
 
@@ -168,15 +168,15 @@ class Adept_Staff(Staff):
 
     def melee_dmg(self,ability_choice):
 
-        if ability_choice  == 'Pummel':
+        if ability_choice  == 'a': ## A = Pummel
             dmg = random.randint(1,8)
             return dmg 
 
-        elif ability_choice == 'Twin Strike':
+        elif ability_choice == 'b': ## B = Twin Strike
             dmg = random.randint(1,8)
             return dmg
 
-        elif ability_choice == 'Crushing Blow':
+        elif ability_choice == 'c': ## C = Crushing Blow
             dmg = random.randint(1,8)
             return dmg
 
@@ -287,15 +287,15 @@ class Journeyman_Staff(Staff):
 
     def melee_dmg(self,ability_choice):
 
-        if ability_choice  == 'Pummel':
+        if ability_choice  == 'a': ## a = Pummel
             dmg = random.randint(1,9)
             return dmg 
 
-        elif ability_choice == 'Twin Strike':
+        elif ability_choice == 'b': ## b = Twin Strike
             dmg = random.randint(1,9)
             return dmg
 
-        elif ability_choice == 'Crushing Blow':
+        elif ability_choice == 'b': ## c = Crushing Blow
             dmg = random.randint(1,9)
             return dmg
 
@@ -335,7 +335,7 @@ class Master_Staff(Staff):
     def special_ability_actions(self, player_character, player_health):
         ability_option = self.special_ability
         if ability_option == "Sunburst":
-            dmg = random.randint(6,16)
+            dmg = random.randint(6,19)
 
             if player_character.attributes['Intelligence'] > 16:
                 dmg = dmg + 5
@@ -352,7 +352,7 @@ class Master_Staff(Staff):
 
             if kill >= 19:
                 dmg = 100000000
-                print("Your target is drawn into passed the event horizon and is banished into an dimension.")
+                print("Your target is drawn in passed the event horizon and is banished into another dimension.")
             elif kill < 19:
                 if player_character.attributes['Intelligence'] > 16:
                     dmg = dmg + 5
@@ -412,15 +412,15 @@ class Master_Staff(Staff):
 
     def melee_dmg(self,ability_choice):
 
-        if ability_choice  == 'Pummel':
+        if ability_choice  == 'a': ## a = Pummel
             dmg = random.randint(1,10)
             return dmg 
 
-        elif ability_choice == 'Twin Strike':
-            dmg = random.randint(1,10)
+        elif ability_choice == 'b': ## b = Twin Strike
+            dmg = random.randint(1,10) 
             return dmg
 
-        elif ability_choice == 'Crushing Blow':
+        elif ability_choice == 'c': ## c = Crushing Blow
             dmg = random.randint(1,10)
             return dmg
 
@@ -459,7 +459,7 @@ class Archmage_Staff(Staff):
 
     def special_ability_actions(self, player_character, player_health):
         ability_option = self.special_ability
-        if ability_option == "Metor Crash":
+        if ability_option == 'Meteor Crash':
             dmg = random.randint(8,25)
 
             if player_character.attributes['Intelligence'] > 16:
@@ -470,7 +470,7 @@ class Archmage_Staff(Staff):
                 dmg += 0
             return player_health, dmg
 
-        if ability_option == "Absolute Zero":
+        if ability_option == 'Absolute Zero':
             dmg = random.randint(1,25)
             kill = random.randint(1,20)
 
@@ -486,25 +486,14 @@ class Archmage_Staff(Staff):
                     dmg += 0 
             return player_health, dmg
 
-        if ability_option == "a":
-            dmg = random.randint(1,25)
-
-            if player_character.attributes['Intelligence'] > 16:
-                dmg = dmg + 8
-            elif 10 <= player_character.attributes['Intelligence'] <= 16:
-                dmg = dmg + 6
-            else:
-                dmg = dmg
-            return player_health, dmg
-
-        if ability_option == "Regenerate":
+        if ability_option == 'Regenerate':
             dmg = 0
             healing  = random.randint(1,25)
             player_health += healing
             print(f"You heal for {healing}.")
             return player_health, dmg
 
-        if ability_option == "Scatter the Weak":
+        if ability_option == 'Scatter the Weak':
             dmg = 100000000
             degen = random.randint(3,15)
             player_health -= degen
@@ -513,20 +502,17 @@ class Archmage_Staff(Staff):
 
     def melee_dmg(self,ability_choice):
 
-        if ability_choice  == 'Pummel':
+        if ability_choice  == 'a': ## a = Pummel
             dmg = random.randint(1,11)
             return dmg 
 
-        elif ability_choice == 'Twin Strike':
+        elif ability_choice == 'b': ## b = Twin Strike
             dmg = random.randint(1,11)
             return dmg
 
-        elif ability_choice == 'Crushing Blow':
+        elif ability_choice == 'c': ## c = Crushing Blow
             dmg = random.randint(1,11)
             return dmg
-
-        else:
-            return 0
 
 class Ritualist_Staff(Staff):
     def __init__(self, name, damage):
@@ -764,20 +750,17 @@ class Gladius(Sword):
 
     def melee_dmg(self,ability_choice):
         ability_choice = ability_choice
-        if ability_choice  == 'focused strike':
+        if ability_choice  == 'a': ## a = Focused Strike
             dmg = random.randint(1,7)
             return dmg 
 
-        elif ability_choice == 'punishing blow':
+        elif ability_choice == 'b': ## b = Punishing Blow
             dmg = random.randint(1,7)
             return dmg
 
-        elif ability_choice == 'hamstring':
+        elif ability_choice == 'c': ## c = Hamstring
             dmg = random.randint(1,7)
             return dmg
-
-        else:
-            return 0
 
 class Sabre(Sword):
     def __init__(self, name, damage):
@@ -854,15 +837,15 @@ class Sabre(Sword):
 
     def melee_dmg(self,ability_choice):
         ability_choice = ability_choice
-        if ability_choice  == 'focused strike':
+        if ability_choice  == 'a': ## a = Focused Strike
             dmg = random.randint(1,8)
             return dmg 
 
-        elif ability_choice == 'punishing blow':
+        elif ability_choice == 'b': ## b = Punishing Blow
             dmg = random.randint(1,8)
             return dmg
 
-        elif ability_choice == 'hamstring':
+        elif ability_choice == 'c': ## c = Hamstring
             dmg = random.randint(1,8)
             return dmg
 
@@ -974,15 +957,15 @@ class Longsword(Sword):
 
     def melee_dmg(self,ability_choice):
         ability_choice = ability_choice
-        if ability_choice  == 'focused strike':
+        if ability_choice  == 'a': ## a = Focused Strike
             dmg = random.randint(1,9)
             return dmg 
 
-        elif ability_choice == 'punishing blow':
+        elif ability_choice == 'b': ## b = Punishing Blow
             dmg = random.randint(1,9)
             return dmg
 
-        elif ability_choice == 'hamstring':
+        elif ability_choice == 'c': ## c = Hamstring
             dmg = random.randint(1,9)
             return dmg
 
@@ -1104,15 +1087,15 @@ class Broadsword(Sword):
 
     def melee_dmg(self,ability_choice):
         ability_choice = ability_choice
-        if ability_choice  == 'focused strike':
+        if ability_choice  == 'a': ## a = Focused Strike
             dmg = random.randint(1,10)
             return dmg 
 
-        elif ability_choice == 'punishing blow':
+        elif ability_choice == 'b': ## b = Punishing Blow
             dmg = random.randint(1,10)
             return dmg
 
-        elif ability_choice == 'hamstring':
+        elif ability_choice == 'c': ## c = Hamstring
             dmg = random.randint(1,10)
             return dmg
 
@@ -1230,15 +1213,15 @@ class Greatsword(Sword):
 
     def melee_dmg(self,ability_choice):
         ability_choice = ability_choice
-        if ability_choice  == 'focused strike':
+        if ability_choice  == 'a': ## a = Focused Strike
             dmg = random.randint(1,11)
             return dmg 
 
-        elif ability_choice == 'punishing blow':
+        elif ability_choice == 'b': ## b = Punishing Blow
             dmg = random.randint(1,11)
             return dmg
 
-        elif ability_choice == 'hamstring':
+        elif ability_choice == 'c': ## c = Hamstring
             dmg = random.randint(1,11)
             return dmg
 
@@ -1328,15 +1311,15 @@ class Mallet(Hammer):
         
     def melee_dmg(self,ability_choice):
         ability_choice = ability_choice
-        if ability_choice  == 'demolish':
+        if ability_choice  == 'a': ## a = Demolish
             dmg = random.randint(1,7)
             return dmg 
 
-        elif ability_choice == 'staggering strike':
+        elif ability_choice == 'b': ## b = Staggering Blow
             dmg = random.randint(1,7)
             return dmg
 
-        elif ability_choice == 'imbued strike':
+        elif ability_choice == 'c': ## c = Imbued Strike
             dmg = random.randint(1,7)
             return dmg
 
@@ -1417,15 +1400,15 @@ class Mace(Hammer):
 
     def melee_dmg(self,ability_choice):
         ability_choice = ability_choice
-        if ability_choice  == 'demolish':
+        if ability_choice  == 'a': ## a = Demolish
             dmg = random.randint(1,8)
             return dmg 
 
-        elif ability_choice == 'staggering strike':
+        elif ability_choice == 'b': ## b = Staggering Blow
             dmg = random.randint(1,8)
             return dmg
 
-        elif ability_choice == 'imbued strike':
+        elif ability_choice == 'c': ## c = Imbued Strike
             dmg = random.randint(1,8)
             return dmg
 
@@ -1506,15 +1489,15 @@ class Morningstar(Hammer):
 
     def melee_dmg(self,ability_choice):
         ability_choice = ability_choice
-        if ability_choice  == 'demolish':
+        if ability_choice  == 'a': ## a = Demolish
             dmg = random.randint(1,9)
             return dmg 
 
-        elif ability_choice == 'staggering strike':
+        elif ability_choice == 'b': ## b = Staggering Blow
             dmg = random.randint(1,9)
             return dmg
 
-        elif ability_choice == 'imbued strike':
+        elif ability_choice == 'c': ## c = Imbued Strike
             dmg = random.randint(1,9)
             return dmg
 
@@ -1595,15 +1578,15 @@ class Maul(Hammer):
 
     def melee_dmg(self,ability_choice):
         ability_choice = ability_choice
-        if ability_choice  == 'demolish':
+        if ability_choice  == 'a': ## a = Demolish
             dmg = random.randint(1,10)
             return dmg 
 
-        elif ability_choice == 'staggering strike':
+        elif ability_choice == 'b': ## b = Staggering Blow
             dmg = random.randint(1,10)
             return dmg
 
-        elif ability_choice == 'imbued strike':
+        elif ability_choice == 'c': ## c = Imbued Strike
             dmg = random.randint(1,10)
             return dmg
 
@@ -1683,15 +1666,15 @@ class Warhammer(Hammer):
 
     def melee_dmg(self,ability_choice):
         ability_choice = ability_choice
-        if ability_choice  == 'demolish':
+        if ability_choice  == 'a': ## a = Demolish
             dmg = random.randint(1,11)
             return dmg 
 
-        elif ability_choice == 'staggering strike':
+        elif ability_choice == 'b': ## b = Staggering Blow
             dmg = random.randint(1,11)
             return dmg
 
-        elif ability_choice == 'imbued strike':
+        elif ability_choice == 'c': ## c = Imbued Strike
             dmg = random.randint(1,11)
             return dmg
 
@@ -1769,15 +1752,15 @@ class Shortbow(Bow):
             return player_health, dmg
 
     def melee_dmg(self,ability_choice):
-        if ability_choice  == 'focused shot':
+        if ability_choice  == 'a': ## a = Focused Shot
             dmg = random.randint(1,7)
             return dmg 
 
-        elif ability_choice == 'swift shot':
+        elif ability_choice == 'b': ## b = Swift Shot
             dmg = random.randint(1,7)
             return dmg
 
-        elif ability_choice == 'Crossfire':
+        elif ability_choice == 'c': ## c = Crossfire
             dmg = random.randint(1,7)
             return dmg
 
@@ -1852,15 +1835,15 @@ class Longbow(Bow):
 
     def melee_dmg(self,ability_choice):
         ability_choice = ability_choice
-        if ability_choice  == 'focused shot':
+        if ability_choice  == 'a': ## a = Focused Shot
             dmg = random.randint(1,8)
             return dmg 
 
-        elif ability_choice == 'swift shot':
+        elif ability_choice == 'b': ## b = Swift Shot
             dmg = random.randint(1,8)
             return dmg
 
-        elif ability_choice == 'Crossfire':
+        elif ability_choice == 'c': ## c = Crossfire
             dmg = random.randint(1,8)
             return dmg
 
@@ -1935,15 +1918,15 @@ class Composite_Bow(Bow):
 
     def melee_dmg(self,ability_choice):
         ability_choice = ability_choice
-        if ability_choice  == 'focused shot':
+        if ability_choice  == 'a': ## a = Focused Shot
             dmg = random.randint(1,9)
             return dmg 
 
-        elif ability_choice == 'swift shot':
+        elif ability_choice == 'b': ## b = Swift Shot
             dmg = random.randint(1,9)
             return dmg
 
-        elif ability_choice == 'Crossfire':
+        elif ability_choice == 'c': ## c = Crossfire
             dmg = random.randint(1,9)
             return dmg
 
@@ -2025,15 +2008,15 @@ class Recurve_Bow(Bow):
 
     def melee_dmg(self,ability_choice):
         ability_choice = ability_choice
-        if ability_choice  == 'focused shot':
+        if ability_choice  == 'a': ## a = Focused Shot
             dmg = random.randint(1,10)
             return dmg 
 
-        elif ability_choice == 'swift shot':
+        elif ability_choice == 'b': ## b = Swift Shot
             dmg = random.randint(1,10)
             return dmg
 
-        elif ability_choice == 'Crossfire':
+        elif ability_choice == 'c': ## c = Crossfire
             dmg = random.randint(1,10)
             return dmg
 
@@ -2122,15 +2105,15 @@ class Aetherbow(Bow):
 
     def melee_dmg(self,ability_choice):
         ability_choice = ability_choice
-        if ability_choice  == 'focused shot':
+        if ability_choice  == 'a': ## a = Focused Shot
             dmg = random.randint(1,11)
             return dmg 
 
-        elif ability_choice == 'swift shot':
+        elif ability_choice == 'b': ## b = Swift Shot
             dmg = random.randint(1,11)
             return dmg
 
-        elif ability_choice == 'Crossfire':
+        elif ability_choice == 'c': ## c = Crossfire
             dmg = random.randint(1,1)
             return dmg
 
@@ -2213,15 +2196,15 @@ class Dirk(Dagger):
 
     def melee_dmg(self,ability_choice):
         ability_choice = ability_choice
-        if ability_choice  == 'kidney shot':
+        if ability_choice  == 'a': ## a = Kidney Shot
             dmg = random.randint(1,7)
             return dmg 
 
-        elif ability_choice == 'go for the throat':
+        elif ability_choice == 'b': ## b = Go For The Throat
             dmg = random.randint(1,7)
             return dmg
 
-        elif ability_choice == 'quickstrike':
+        elif ability_choice == 'c': ## c = Quickstrike
             dmg = random.randint(1,7)
             return dmg
 
@@ -2295,15 +2278,15 @@ class Kris(Dagger):
 
     def melee_dmg(self,ability_choice):
         ability_choice = ability_choice
-        if ability_choice  == 'kidney shot':
+        if ability_choice  == 'a': ## a = Kidney Shot
             dmg = random.randint(1,9)
             return dmg 
 
-        elif ability_choice == 'go for the throat':
+        elif ability_choice == 'b': ## b = Go For The Throat
             dmg = random.randint(1,9)
             return dmg
 
-        elif ability_choice == 'quickstrike':
+        elif ability_choice == 'c': ## c = Quickstrike
             dmg = random.randint(1,9)
             return dmg
 
@@ -2388,15 +2371,15 @@ class Sai(Dagger):
 
     def melee_dmg(self,ability_choice):
         ability_choice = ability_choice
-        if ability_choice  == 'kidney shot':
+        if ability_choice  == 'a': ## a = Kidney Shot
             dmg = random.randint(1,10)
             return dmg 
 
-        elif ability_choice == 'go for the throat':
+        elif ability_choice == 'b': ## b = Go For The Throat
             dmg = random.randint(1,10)
             return dmg
 
-        elif ability_choice == 'quickstrike':
+        elif ability_choice == 'c': ## c = Quickstrike
             dmg = random.randint(1,10)
             return dmg
 
@@ -2497,15 +2480,15 @@ class Serpant_Blades(Dagger):
 
     def melee_dmg(self,ability_choice):
         ability_choice = ability_choice
-        if ability_choice  == 'kidney shot':
+        if ability_choice  == 'a': ## a = Kidney Shot
             dmg = random.randint(1,11)
             return dmg 
 
-        elif ability_choice == 'go for the throat':
+        elif ability_choice == 'b': ## b = Go For The Throat
             dmg = random.randint(1,11)
             return dmg
 
-        elif ability_choice == 'quickstrike':
+        elif ability_choice == 'c': ## c = Quickstrike
             dmg = random.randint(1,11)
             return dmg
 

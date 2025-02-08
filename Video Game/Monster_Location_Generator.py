@@ -7,8 +7,8 @@ def number_of_monsters_to_fight():
 
 
 def monster_coordiantes_generator():
-    xlst = [-4,-3,-2,-1,0,1,2,3,4]
-    ylst = [-6,-5,-4,-3,-2,-1,0,1,2,3,4,5,6]
+    xlst = [-3,-2,-1,0,1,2,3]
+    ylst = [-4,-3,-2,-1,0,1,2,3,4,5,6]
     x = random.choice(xlst)
     y = random.choice(ylst)
     monster_location = {'x':x,'y':y}

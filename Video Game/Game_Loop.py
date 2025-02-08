@@ -134,7 +134,7 @@ def game_loop(player_name, player_character, player_health, player_location, pot
 
     ## If there is no combat ##
             else:
-                no_encounter = f"The path remains clear...for now. Continue moving."
+                no_encounter = f"Continue moving."
                 for character in no_encounter:
                     if character == ' ':
                         time.sleep(.03)
