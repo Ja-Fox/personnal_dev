@@ -9,22 +9,21 @@ class Potion:
 class Minor_Health_Potion(Potion):
     def __init__(self, name = "Minor Health Potion", heal=5):
         super().__init__(name,heal)
-        return heal
 
 class Health_Potion(Potion):
     def __init__(self, name='Health Potion', heal=10):
         super().__init__(name,heal)
-        return heal
+        self.heal = heal
+        self.name = name
 
 class Greater_Health_Potion(Potion):
     def __init__(self, name='Greater Health Potion', heal=25):
         super().__init__(name,heal)
-        return heal
-        
+    
 class Life_Potion(Potion):
     def __init__(self, name='Life Potion', heal=50):
         super().__init__(name,heal)
-        return heal
+    
 
 #########################
 #### Inventory Items ####

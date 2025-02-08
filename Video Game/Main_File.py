@@ -7,7 +7,7 @@ import Loot_Items
 import Loot_Generator
 import Use_Potion
 import Monster_Location_Generator
-from Monster_class import Boss_Monster
+import Monster_class
 import Quest_Introduction
 import Master_Map
 import Character_Creation
@@ -16,38 +16,36 @@ import Use_Potion
 
 if __name__ == '__main__':
 
-    
 ## Scripted character for testing ##
-    player_name = "Jason"
-    player_health = 40    
-    attributes = {}
-    attributes['Strength'] = 20
-    attributes['Constitution'] = 20
-    attributes['Dexterity'] = 20
-    attributes['Intelligence'] = 20
-    attributes['Wisdom'] = 20
-    attributes['Charisma'] = 20
-    attributes['Luck'] = 20
-    player_character = Archmage(player_name, attributes)
-    print('\n')
-
-
- ## Character creation walkthrough, item generation, place the player on the map ##
-    # player_character = Character_Creation.game_setup_and_intro()
-    # player_health = player_character.starting_player_health()
+    # player_name = "Jason"
+    # player_health = 40    
+    # attributes = {}
+    # attributes['Strength'] = 20
+    # attributes['Constitution'] = 20
+    # attributes['Dexterity'] = 20
+    # attributes['Intelligence'] = 20
+    # attributes['Wisdom'] = 20
+    # attributes['Charisma'] = 20
+    # attributes['Luck'] = 20
+    # player_character = Archmage(player_name, attributes)
     # print('\n')
-    # player_name = player_character.player_name
+
+
+## Character creation walkthrough, item generation, place the player on the map ##
+    player_character = Character_Creation.game_setup_and_intro()
+    player_health = player_character.starting_player_health()
+    print('\n')
+    player_name = player_character.player_name
     player_location = Character_Creation.player_starting_location()
-    print(f'You mark your map with an X at your starting location of {player_location}')
-    potion_inventory = []
+    print(f'You start at of {player_location}')
+    potion_inventory = ['Health Potion']
     item_inventory = []
     potion_inventory , item_inventory = Character_Creation.character_inventory(potion_inventory,item_inventory,item_to_add='Health Potion')
-    # player_items = ['Health Potion']
 
 
 ## Creates a boss monster and places it on the map ##
-    # boss_location = {f'x':,'y':6}
-    boss_instance = Boss_Monster()
+    # boss_location = {f'x':-3,'y':6}
+    boss_instance = Monster_class.Boss_Monster()
     boss = boss_instance.get_boss_monster_encounter()
     boss_health = boss_instance.get_boss_monster_health()
     boss_location = boss_instance.get_boss_monster_location()
@@ -87,7 +85,7 @@ if __name__ == '__main__':
     time.sleep(5)
     Master_Map.master_map(player_location)
     
-## Game start ##
+## Game loop start ##
     while player_health > 0 and player_location != boss_location:
         
         action = input("""What is you action? Type 'help' for options. """).lower()
@@ -152,7 +150,18 @@ Congratulations, {player_name}. Your name will become a part of local history. P
             
 ## Then checks if player should fight a monster ##
             elif player_location in list_of_fights:
-                player_health, potion_inventory, item_inventory = Combat_Sequence.easy_combat(player_health,player_character,potion_inventory, item_inventory)
+
+## If a fight should happen, this chooses the difficulty level of the encounter ##
+                level_of_encounter = random.randint(1,3)
+                if level_of_encounter == 1:
+                    player_health, potion_inventory, item_inventory = Combat_Sequence.easy_combat(player_health,player_character,potion_inventory, item_inventory)
+               
+                elif level_of_encounter == 2:
+                    player_health, potion_inventory, item_inventory = Combat_Sequence.easy_combat(player_health,player_character,potion_inventory, item_inventory)
+
+                elif level_of_encounter == 3:
+                    player_health, potion_inventory, item_inventory = Combat_Sequence.easy_combat(player_health,player_character,potion_inventory, item_inventory)
+                
                 while player_location in list_of_fights:
                     list_of_fights.remove(player_location)
                 time.sleep(2)
@@ -168,7 +177,7 @@ Congratulations, {player_name}. Your name will become a part of local history. P
                         print (character,end='',flush=True)
                         time.sleep(.05)
                     print('\n')
-                    potion_inventory.append(found_potion)
+                    potion_inventory.append(found_potion.name)
                 else:
                     continue
 
@@ -249,7 +258,9 @@ Congratulations, {player_name}. Your name will become a part of local history. P
 ## Prompts Potion Use interaction ##
         if action == 'potion':
             if len(potion_inventory) > 0 :
-                Loot_Items.list_potions_in_inventory()
+                print('\n')
+                Loot_Items.list_potions_in_inventory(potion_inventory)
+                print('\n')
                 question = "Which potion would you like to use? Type only the first word. "
                 for character in question:
                     if character == ' ':
@@ -259,14 +270,17 @@ Congratulations, {player_name}. Your name will become a part of local history. P
                 potion_to_use = input().title()
                 if potion_to_use == 'Minor':
                     player_health = Use_Potion.use_minor_health_potion(player_health)
+                    potion_inventory.remove('Minor Health Potion')
                 elif potion_to_use == 'Health':
                     player_health = Use_Potion.use_health_potion(player_health)
+                    potion_inventory.remove('Health Potion')
                 elif potion_to_use == 'Greater':
                     player_health = Use_Potion.use_greater_health_potion(player_health)
+                    potion_inventory.remove('Greater Health Potion')
                 elif potion_to_use == 'Life':
                     player_health = Use_Potion.use_life_potion(player_health)
-                potion_inventory.remove(potion_to_use)
-                output = f"You healed to {player_health} HP."
+                    potion_inventory.remove('Life Potion')
+                output = f"You healed to {player_health} HP.\n"
                 for character in output:
                     if character == ' ':
                         time.sleep(.05)
